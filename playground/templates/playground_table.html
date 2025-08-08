@@ -1,0 +1,112 @@
+<!-- filepath: c:\PythonProjects\Demo\myproject\playground\templates\playground_table.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playground Data Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #a18cd1 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(161, 140, 209, 0.15);
+            padding: 30px 20px;
+        }
+        h1 {
+            color: #7c3aed;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #a18cd1;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f5f7fa;
+        }
+        .back-btn {
+            background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 10px 28px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.12);
+            transition: background 0.3s;
+            margin: 18px 0 0 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #7c3aed 0%, #a18cd1 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Playground Data by PHN</h1>
+       <form method="get" style="margin-bottom: 20px;">
+            <label for="phn">Enter PHN:</label>
+            <input type="text" id="phn" name="phn" value="{{ phn_query }}" style="padding:8px; border-radius:6px; border:1px solid #a18cd1;">
+            <button type="submit" class="back-btn" style="margin-left:10px;">Search</button>
+        </form>
+        {% if phn_query %}
+        <form method="get" action="{% url 'download_phn' %}">
+            <input type="hidden" name="phn" value="{{ phn_query }}">
+            <button type="submit" class="back-btn" style="margin-bottom:20px;">Download Data</button>
+        </form>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Year</th>
+                <th>PHN</th>
+                <th>Surname</th>
+                <th>Given Name</th>
+                <th>Middle Name</th>
+                <th>PS</th>
+                <th>ES</th>
+                <th>Status</th>
+            </tr>
+            {% for item in playground_data %}
+            <tr>
+                <td>{{ item.month }}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.PHN }}</td>
+                <td>{{ item.surname }}</td>
+                <td>{{ item.given_name }}</td>
+                <td>{{ item.middle_name }}</td>
+                <td>{{ item.ps }}</td>
+                <td>{{ item.es }}</td>
+                <td>{{ item.status }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="9">No data found for PHN "{{ phn_query }}"</td>
+            </tr>
+            {% endfor %}
+        </table>
+         {% else %}
+        <p style="margin-top:20px;">Please enter a PHN to view data.</p>
+        {% endif %}
+        <a href="/playground/" class="back-btn">Back to Playground</a>
+    </div>

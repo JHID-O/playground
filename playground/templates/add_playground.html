@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Playground Data</title>
+    <title>Upload Data</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,7 +45,7 @@
             font-size: 1em;
             margin-bottom: 8px;
         }
-        button {
+        button, .back-btn {
             background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
             color: #fff;
             border: none;
@@ -56,8 +56,11 @@
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(124, 58, 237, 0.12);
             transition: background 0.3s;
+            margin: 8px 5px 0 5px;
+            text-decoration: none;
+            display: inline-block;
         }
-        button:hover {
+        button:hover, .back-btn:hover {
             background: linear-gradient(90deg, #7c3aed 0%, #a18cd1 100%);
         }
     </style>
@@ -70,3 +73,7 @@
             {{ form.as_p }}
             <button type="submit">Submit</button>
         </form>
+        <a href="/playground/" class="back-btn">Back to Playground</a>
+    </div>
+</body>
+</html>
