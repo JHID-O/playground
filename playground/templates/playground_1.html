@@ -51,11 +51,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Playground!</h1>
-        <p>Please Choose wisely.<br>
-        Try out new features and ideas here.</p>
-       <a href="/playground/table/" class="play-btn">Request Form</a>
-        <a href="/playground/add/" class="add-btn">Add Playground Data</a>
+        <h1>Welcome to the Playground</h1>
+        <a href="{% url 'playground_table' %}" class="play-btn">Request Form</a>
+        <a href="{% url 'add_playground' %}" class="add-btn">Add Data</a>
+        <a href="{% url 'all_data_table' %}" class="play-btn" style="background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%); margin-top: 28px;">All Data</a>
     </div>
 </body>
 </html>

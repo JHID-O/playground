@@ -1,3 +1,4 @@
+<!-- filepath: c:\PythonProjects\Demo\myproject\playground\templates\add_playground.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,12 +69,14 @@
 <body>
     <div class="container">
         <h1>Add Playground Data</h1>
-        <form method="post">
+         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
+            <div class="form-row">
+                <label for="csv_file">Upload CSV file:</label>
+                <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
+            </div>
+            <button type="submit">Upload</button>
         </form>
         <a href="/playground/" class="back-btn">Back to Playground</a>
     </div>
 </body>
-</html>

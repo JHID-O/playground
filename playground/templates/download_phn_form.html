@@ -1,0 +1,38 @@
+<!-- Form for user to enter placeholders before downloading the Word document -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Certification</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f7fa; }
+        .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 16px rgba(161,140,209,0.15); padding: 30px 20px; }
+        h1 { color: #7c3aed; margin-bottom: 24px; letter-spacing: 1px; text-align: center; }
+        label { display: block; margin-top: 16px; font-weight: bold; }
+        input[type="text"], input[type="date"] { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #a18cd1; margin-top: 4px; }
+        button { margin-top: 24px; padding: 10px 24px; background: #7c3aed; color: #fff; border: none; border-radius: 6px; font-size: 1em; cursor: pointer; width: 100%; }
+        button:hover { background: #a18cd1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Certification Download</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phil_no">PhilHealth No.</label>
+            <input type="text" id="phil_no" name="phil_no" required>
+
+            <label for="date_hired">Date Hired</label>
+            <input type="date" id="date_hired" name="date_hired" required>
+
+            <label for="position">Position</label>
+            <input type="text" id="position" name="position" required>
+
+            <button type="submit">Download Certification</button>
+        </form>
+    </div>
+</body>
+</html>
