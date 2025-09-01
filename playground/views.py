@@ -1,3 +1,26 @@
+from django.views.decorators.csrf import csrf_protect
+# Admin login view
+@csrf_protect
+def admin_login(request):
+    error = None
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        if password == 'carelon':
+            request.session['is_admin'] = True
+            return redirect('admin_menu')
+        else:
+            error = 'Incorrect password.'
+    return render(request, 'admin_login.html', {'error': error})
+
+# Admin menu view
+def admin_menu(request):
+    if not request.session.get('is_admin'):
+        return redirect('admin_login')
+    return render(request, 'admin_menu.html')
+from .models import PlaygroundModel, DownloadNotification
+def tracker_dashboard(request):
+    notifications = DownloadNotification.objects.all().order_by('-download_date')
+    return render(request, 'tracker_dashboard.html', {'notifications': notifications})
 from django.shortcuts import render, redirect
 from .forms import PlaygroundModelForm
 from .models import PlaygroundModel
@@ -34,6 +57,7 @@ def download_phn(request):
     phil_no = request.POST.get('phil_no')
     date_hired = request.POST.get('date_hired')
     position = request.POST.get('position')
+    email = request.POST.get('email')
     phn_query = request.GET.get('phn', '')
     query = request.GET.get('q', '')
     # Filter data as in all_data_table
@@ -98,6 +122,14 @@ def download_phn(request):
     doc.save(f)
     f.seek(0)
     filename = f"certification_{slugify(name or 'employee')}.docx"
+    # Log the download event
+    DownloadNotification.objects.create(
+        name=name,
+        phil_no=phil_no,
+        date_hired=date_hired,
+        position=position,
+        email=email
+    )
     response = HttpResponse(f.getvalue(), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response

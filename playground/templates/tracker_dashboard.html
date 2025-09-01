@@ -1,0 +1,47 @@
+<!-- Tracker Dashboard: List all download notifications -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Tracker Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f7fa; }
+        .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 16px rgba(161,140,209,0.15); padding: 30px 20px; }
+        h1 { color: #7c3aed; margin-bottom: 24px; letter-spacing: 1px; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: #a18cd1; color: #fff; }
+        .back-btn { display: inline-block; margin-top: 10px; padding: 8px 16px; background: #a18cd1; color: #fff; border-radius: 6px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <a href="{% url 'admin_menu' %}" class="back-btn" style="float: right; margin-top: 0; margin-bottom: 10px;">Back to Admin</a>
+        <h1>Download Tracker Dashboard</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>PhilHealth No.</th>
+                <th>Date Hired</th>
+                <th>Position</th>
+            
+                <th>Download Date</th>
+            </tr>
+            {% for notif in notifications %}
+            <tr>
+                <td>{{ notif.name }}</td>
+                <td>{{ notif.phil_no }}</td>
+                <td>{{ notif.date_hired }}</td>
+                <td>{{ notif.position }}</td>
+               
+                <td>{{ notif.download_date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No downloads yet.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

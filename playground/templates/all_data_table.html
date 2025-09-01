@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="/playground/" class="back-btn" style="float: right; margin-top: 0; margin-bottom: 10px;">Back to Playground</a>
+    <a href="{% url 'admin_menu' %}" class="back-btn" style="float: right; margin-top: 0; margin-bottom: 10px;">Back to Admin</a>
         <h1>All Playground Data</h1>
         <form method="get" class="search-bar">
             <input type="text" name="q" placeholder="Search by any field..." value="{{ query }}">

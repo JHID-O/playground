@@ -1,5 +1,18 @@
 from django.db import models
 
+class DownloadNotification(models.Model):
+    name = models.CharField(max_length=200)
+    phil_no = models.CharField(max_length=50)
+    date_hired = models.CharField(max_length=50)
+    position = models.CharField(max_length=100)
+    email = models.EmailField()
+    download_date = models.DateTimeField(auto_now_add=True)
+    doc_file = models.FileField(upload_to='notifications/', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.phil_no} - {self.download_date.strftime('%Y-%m-%d %H:%M')}"
+from django.db import models
+
 class PlaygroundModel(models.Model):
     month = models.CharField(max_length=20)
     year = models.IntegerField()
